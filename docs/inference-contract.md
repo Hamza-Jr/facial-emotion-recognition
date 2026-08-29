@@ -44,6 +44,8 @@ The model expects image tensors with the following properties:
 - **Batched tensor shape:** `(1, 48, 48, 1)` (batch_size, height, width, channels).
 
 ### Image Preprocessing Contract
+- Detect the primary face 
+- Crop the detected face while preserving the original-resolution pixels
 - Convert image to grayscale
 - Resize to: 48x48 pixels
 - Convert pixel values to numeric array (`float32`)

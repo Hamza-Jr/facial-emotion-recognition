@@ -6,6 +6,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Model configuration 
 MODEL_PATH = BASE_DIR / "models" / "emotion_recognition_model.keras"
 
+#YUNET Model configuration 
+YUNET_MODEL_PATH = BASE_DIR / "models" / "face_detection_yunet_2023mar.onnx"
+
 
 # Image configuration
 IMAGE_SIZE = (48, 48)

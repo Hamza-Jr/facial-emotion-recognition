@@ -6,7 +6,7 @@ os.environ["TF_ENABLE_ONEDNN_OPTS"] = "0"
 
 import tensorflow as tf
 
-from config import MODEL_PATH
+from src.config import MODEL_PATH
 
 
 def load_model() -> tf.keras.Model:

@@ -1,3 +1,12 @@
+from pathlib import Path
+
+# Project root directory 
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Model configuration 
+MODEL_PATH = BASE_DIR / "models" / "emotion_recognition_model.keras"
+
+
 # Image configuration
 IMAGE_SIZE = (48, 48)
 IMAGE_CHANNELS = 1

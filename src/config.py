@@ -3,11 +3,13 @@ from pathlib import Path
 # Project root directory 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+MODELS_DIR = BASE_DIR / "models"
+
 # Model configuration 
-MODEL_PATH = BASE_DIR / "models" / "emotion_recognition_model.keras"
+KERAS_MODEL_PATH = MODELS_DIR / "emotion_recognition_model.keras"
 
 #YUNET Model configuration 
-YUNET_MODEL_PATH = BASE_DIR / "models" / "face_detection_yunet_2023mar.onnx"
+YUNET_MODEL_PATH = MODELS_DIR / "face_detection_yunet_2023mar.onnx"
 
 
 # Image configuration

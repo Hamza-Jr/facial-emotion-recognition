@@ -2,26 +2,28 @@ import numpy as np
 from PIL import Image
 
 from src.config import EMOTION_LABELS
-from src.model import load_model
+from src.models.base import ModelBase
 from src.preprocessing import preprocess_image
 
 
-# Load the model once when this module is imported.
-model = load_model()
+class EmotionPredictor:
+    """Predict emotions using an injected model implementation."""
 
+    def __init__(self, model: ModelBase) -> None:
+        self._model = model
 
-def predict_emotion(image: Image.Image) -> dict[str, str | float]:
-    """Predict the emotion and confidence for an input image."""
+    def predict_emotion(self, image: Image.Image) -> dict[str, str | float]:
+        """Predict the emotion and confidence for an input image."""
 
-    processed_image = preprocess_image(image)
+        processed_image = preprocess_image(image)
 
-    probabilities = model.predict(processed_image, verbose=0)[0]
+        probabilities = self._model.predict(processed_image)[0]
 
-    predicted_class = int(np.argmax(probabilities))
-    emotion = EMOTION_LABELS[predicted_class]
-    confidence = float(probabilities[predicted_class])
+        predicted_class = int(np.argmax(probabilities))
+        emotion = EMOTION_LABELS[predicted_class]
+        confidence = float(probabilities[predicted_class])
 
-    return {
-        "emotion": emotion,
-        "confidence": confidence,
-    }
+        return {
+            "emotion": emotion,
+            "confidence": confidence,
+        }

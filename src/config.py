@@ -8,7 +8,9 @@ MODELS_DIR = BASE_DIR / "models"
 # Model configuration 
 KERAS_MODEL_PATH = MODELS_DIR / "emotion_recognition_model.keras"
 
-#YUNET Model configuration 
+ONNX_MODEL_PATH = MODELS_DIR / "emotion_recognition_model.onnx"
+
+# YuNet model configuration
 YUNET_MODEL_PATH = MODELS_DIR / "face_detection_yunet_2023mar.onnx"
 
 
@@ -19,7 +21,7 @@ NORMALIZATION_FACTOR = 255.0
 
 NUM_CLASSES = 7
 
-# # Emotion label mapping classes
+# Emotion label mapping classes
 EMOTION_LABELS = {
     0: "Anger",
     1: "Disgust",

@@ -1,18 +1,27 @@
 from pathlib import Path
 
+import pytest
 from PIL import Image
 
-from src.config import EMOTION_LABELS, KERAS_MODEL_PATH
+from src.config import EMOTION_LABELS, KERAS_MODEL_PATH, ONNX_MODEL_PATH
 from src.models.keras_model import KerasEmotionModel
+from src.models.onnx_model import ONNXEmotionModel
 from src.predictor import EmotionPredictor
 
 
 FIXTURE_DIR = Path(__file__).parent / "fixtures"
 
 
-def test_predict_emotion() -> None:
-    """Verify that EmotionPredictor returns emotion and confidence."""
-    model = KerasEmotionModel(KERAS_MODEL_PATH)
+@pytest.mark.parametrize(
+    "model_class, model_path",
+    [
+        (KerasEmotionModel, KERAS_MODEL_PATH),
+        (ONNXEmotionModel, ONNX_MODEL_PATH),
+    ],
+)
+def test_predict_emotion(model_class, model_path) -> None:
+    """Verify that EmotionPredictor works with each model implementation."""
+    model = model_class(model_path)
     predictor = EmotionPredictor(model)
 
     image = Image.open(FIXTURE_DIR / "test.png")

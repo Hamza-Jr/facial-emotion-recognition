@@ -39,4 +39,6 @@ Thumbs.db
 logs/
 *.log
 
-scripts/predict_image.py
+
+# Temporary manual test scripts
+manual_test/

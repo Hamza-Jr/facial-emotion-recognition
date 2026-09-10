@@ -1,11 +1,10 @@
-from io import BytesIO
-
-from fastapi import APIRouter, Depends, File, UploadFile
-from PIL import Image
+from fastapi import APIRouter, Depends, File, HTTPException, UploadFile
 
 from src.api.dependencies import get_predictor
+from src.api.image_validator import validate_image
 from src.api.schemas import HealthResponse, PredictionResponse
 from src.predictor import EmotionPredictor
+from src.preprocessing import NoFaceDetectedError
 
 
 router = APIRouter()
@@ -25,10 +24,22 @@ async def predict(
 ) -> PredictionResponse:
     """Predict the emotion from an uploaded image."""
 
-    contents = await image.read()
-    pil_image = Image.open(BytesIO(contents))
+    pil_image = await validate_image(image)
 
-    result = predictor.predict_emotion(pil_image)
+    try:
+        result = predictor.predict_emotion(pil_image)
+
+    except NoFaceDetectedError as exc:
+        raise HTTPException(
+            status_code=422,
+            detail=str(exc),
+        ) from exc
+
+    except Exception as exc:
+        raise HTTPException(
+            status_code=500,
+            detail="Prediction failed.",
+        ) from exc
 
     return PredictionResponse(
         emotion=result["emotion"],

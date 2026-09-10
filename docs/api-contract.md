@@ -50,8 +50,11 @@ Predict the emotion of a face from an uploaded image.
 
 The API handles:
 
-- Missing image
-- Invalid image
-- Unsupported image format
-- No face detected
-- Prediction errors
+- Missing image — HTTP 422
+- Empty upload — HTTP 400
+- Invalid image — HTTP 400
+- Unsupported MIME type — HTTP 415
+- Unsupported file extension — HTTP 415
+- Image too large — HTTP 413
+- No face detected — HTTP 422
+- Prediction errors — HTTP 500

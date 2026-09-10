@@ -3,6 +3,10 @@ from PIL import Image
 from src.config import IMAGE_SIZE, NORMALIZATION_FACTOR
 from src.face_detection import detect_and_crop_face
 
+class NoFaceDetectedError(Exception):
+    """Raised when no face is detected in an image."""
+
+
 
 def preprocess_image(image: Image.Image) -> np.ndarray:
     """Preprocess an image for model inference."""
@@ -11,7 +15,8 @@ def preprocess_image(image: Image.Image) -> np.ndarray:
     image = detect_and_crop_face(image)
 
     if image is None:
-        raise ValueError("No face detected in the image.")
+        raise NoFaceDetectedError("No face detected in the image.")
+
 
     # 2. Convert to grayscale and resize
     image = image.convert("L")

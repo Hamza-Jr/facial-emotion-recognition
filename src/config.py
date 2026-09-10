@@ -32,3 +32,16 @@ EMOTION_LABELS = {
     6: "Neutral",
 }
 
+SUPPORTED_IMAGE_TYPES = {
+    "image/jpeg",
+    "image/png",
+}
+
+SUPPORTED_IMAGE_EXTENSIONS = {
+    ".png",
+    ".jpg",
+    ".jpeg",
+}
+
+
+MAX_IMAGE_SIZE_BYTES = 6 * 1024 * 1024

@@ -9,6 +9,7 @@ MODELS_DIR = BASE_DIR / "models"
 KERAS_MODEL_PATH = MODELS_DIR / "emotion_recognition_model.keras"
 
 ONNX_MODEL_PATH = MODELS_DIR / "emotion_recognition_model.onnx"
+ONNX_MODEL_VERSION = "1.0.0"
 
 # YuNet model configuration
 YUNET_MODEL_PATH = MODELS_DIR / "face_detection_yunet_2023mar.onnx"
